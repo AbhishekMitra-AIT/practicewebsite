@@ -18,30 +18,31 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
-from django.conf.urls import url
-from django.conf.urls import patterns, include, url
+
+# from django.conf.urls import url
+# from django.conf.urls import patterns, include, url
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('products/', include('products.urls')),
-    url(r'^media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}), 
-    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT})
+    # path(r'^media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}), 
+    # path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT})
 ]
 
 urlpatterns += static(settings.MEDIA_URL,
                       document_root = settings.MEDIA_ROOT)
 
 
-admin.autodiscover()
-urlpatterns = patterns('',
-    url(r'^$', include('myapp.cesar.urls')),
-    url(r'^admin/', include(admin.site.urls)),
-)
+# admin.autodiscover()
+# urlpatterns = patterns('',
+    # url(r'^$', include('products.urls')),
+    # url(r'^admin/', include(admin.site.urls)),
+# )
 
 
-if not settings.DEBUG:
-    urlpatterns += patterns('',
-            (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
-        )
+# if not settings.DEBUG:
+    # urlpatterns += patterns('',
+            # (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+        # )
