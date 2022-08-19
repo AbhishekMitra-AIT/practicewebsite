@@ -19,6 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
 from django.conf.urls import url
+from django.conf.urls import patterns, include, url
 
 
 
@@ -31,3 +32,16 @@ urlpatterns = [
 
 urlpatterns += static(settings.MEDIA_URL,
                       document_root = settings.MEDIA_ROOT)
+
+
+admin.autodiscover()
+urlpatterns = patterns('',
+    url(r'^$', include('myapp.cesar.urls')),
+    url(r'^admin/', include(admin.site.urls)),
+)
+
+
+if not settings.DEBUG:
+    urlpatterns += patterns('',
+            (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+        )
