@@ -17,32 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.views.static import serve
-
-# from django.conf.urls import url
-# from django.conf.urls import patterns, include, url
-
+# from django.views.static import serve
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('products/', include('products.urls')),
-    # path(r'^media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}), 
-    # path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT})
+    path('products/', include('products.urls'))  
 ]
 
 urlpatterns += static(settings.MEDIA_URL,
                       document_root = settings.MEDIA_ROOT)
-
-
-# admin.autodiscover()
-# urlpatterns = patterns('',
-    # url(r'^$', include('products.urls')),
-    # url(r'^admin/', include(admin.site.urls)),
-# )
-
-
-# if not settings.DEBUG:
-    # urlpatterns += patterns('',
-            # (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
-        # )
